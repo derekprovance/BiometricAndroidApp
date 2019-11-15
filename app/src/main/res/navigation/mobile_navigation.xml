@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.derekprovance.biometricsapp.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_blood_sugar"
+        android:name="com.derekprovance.biometricsapp.ui.bloodSugar.BloodSugarFragment"
+        android:label="@string/menu_blood_sugar"
+        tools:layout="@layout/fragment_blood_sugar" />
+
+    <fragment
+        android:id="@+id/nav_meal_logging"
+        android:name="com.derekprovance.biometricsapp.ui.mealLogging.MealLoggingFragment"
+        android:label="@string/menu_meal_logging"
+        tools:layout="@layout/fragment_meal_logging" />
+
+    <fragment
+        android:id="@+id/nav_water_consumption"
+        android:name="com.derekprovance.biometricsapp.ui.waterConsumption.WaterConsumptionFragment"
+        android:label="@string/menu_water_consumption"
+        tools:layout="@layout/fragment_water_consumption" />
+
+</navigation>
