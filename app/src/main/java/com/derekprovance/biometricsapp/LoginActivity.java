@@ -29,6 +29,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void authenticateLogin(View view) {
+        //TODO - this is an extremely poor implementation of authentication. The goal will eventually be
+        //to implement Spring Security on the API side with accounts. For now this project is meant to be
+        //more of an educational introduction into Android app developement
         if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
             Toast.makeText(getApplicationContext(), "Hello admin!", Toast.LENGTH_SHORT).show();
             SharedPreferences credPrefs = getSharedPreferences(Constants.CRED_PREF_NAME, MODE_PRIVATE);
