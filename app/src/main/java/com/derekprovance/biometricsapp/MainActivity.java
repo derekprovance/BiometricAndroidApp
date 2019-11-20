@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -65,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -75,6 +75,30 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                logoutUser();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void logoutUser() {
+        SharedPreferences credPrefs = getSharedPreferences(Constants.CRED_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor edit = credPrefs.edit();
+
+        edit.remove(Constants.CRED_NAME);
+        edit.remove(Constants.CRED_PASS);
+        edit.remove(Constants.AUTHENTICATED);
+
+        edit.apply();
+
+        navigateToLogin();
     }
 
     public void navigateToLogin() {
