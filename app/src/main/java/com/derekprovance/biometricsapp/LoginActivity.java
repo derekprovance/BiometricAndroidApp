@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.derekprovance.biometricsapp.auth.AuthenticationTask;
+import com.derekprovance.biometricsapp.auth.OnEventListener;
+import com.derekprovance.biometricsapp.util.Constants;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText username;
@@ -26,22 +29,31 @@ public class LoginActivity extends AppCompatActivity {
         //to implement Spring Security on the API side with accounts. For now this project is meant to be
         //more of an educational introduction into Android app development
 
-        String usernameInput = username.getText().toString();
-        String passwordInput = password.getText().toString();
+        final String usernameInput = username.getText().toString();
+        final String passwordInput = password.getText().toString();
+        final Intent mainActivity = new Intent(this, MainActivity.class);
 
-        if (checkLogin(usernameInput, passwordInput)) {
-            Toast.makeText(
-                    getApplicationContext(),
-                    String.format("Hello %s!", usernameInput),
-                    Toast.LENGTH_SHORT
-            ).show();
+        AuthenticationTask auth = new AuthenticationTask(new OnEventListener<Boolean>() {
+            @Override
+            public void onSuccess(Boolean result) {
+                Toast.makeText(
+                        getApplicationContext(),
+                        String.format("Hello %s!", usernameInput),
+                        Toast.LENGTH_SHORT
+                ).show();
 
-            saveLoginCredentials(usernameInput, passwordInput);
+                saveLoginCredentials(usernameInput, passwordInput);
 
-            startActivity(new Intent(this, MainActivity.class));
-        } else {
-            Toast.makeText(getApplicationContext(), "Unable to log in", Toast.LENGTH_SHORT).show();
-        }
+                startActivity(mainActivity);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(getApplicationContext(), "Unable to log in", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        auth.execute(usernameInput, passwordInput);
     }
 
     private void saveLoginCredentials(String username, String password) {
@@ -52,12 +64,6 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString(Constants.CRED_PASS, password);
         editor.putBoolean(Constants.AUTHENTICATED, true);
         editor.apply();
-    }
-
-    private boolean checkLogin(String username, String password) {
-        //TODO - make call to api and determine if login was success
-
-        return true;
     }
 
     private void setupVariables() {

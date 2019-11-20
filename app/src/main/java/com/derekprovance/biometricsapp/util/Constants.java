@@ -1,4 +1,4 @@
-package com.derekprovance.biometricsapp;
+package com.derekprovance.biometricsapp.util;
 
 public class Constants {
     public static final String SERVER_URL = "https://biometrics.derek.pro";
