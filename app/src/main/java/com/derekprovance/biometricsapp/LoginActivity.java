@@ -36,14 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         AuthenticationTask auth = new AuthenticationTask(new OnEventListener<Boolean>() {
             @Override
             public void onSuccess(Boolean result) {
-                Toast.makeText(
-                        getApplicationContext(),
-                        String.format("Hello %s!", usernameInput),
-                        Toast.LENGTH_SHORT
-                ).show();
-
                 saveLoginCredentials(usernameInput, passwordInput);
-
                 startActivity(mainActivity);
             }
 
