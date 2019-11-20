@@ -17,16 +17,4 @@
         android:label="@string/menu_blood_sugar"
         tools:layout="@layout/fragment_blood_sugar" />
 
-    <fragment
-        android:id="@+id/nav_meal_logging"
-        android:name="com.derekprovance.biometricsapp.ui.mealLogging.MealLoggingFragment"
-        android:label="@string/menu_meal_logging"
-        tools:layout="@layout/fragment_meal_logging" />
-
-    <fragment
-        android:id="@+id/nav_water_consumption"
-        android:name="com.derekprovance.biometricsapp.ui.waterConsumption.WaterConsumptionFragment"
-        android:label="@string/menu_water_consumption"
-        tools:layout="@layout/fragment_water_consumption" />
-
 </navigation>
